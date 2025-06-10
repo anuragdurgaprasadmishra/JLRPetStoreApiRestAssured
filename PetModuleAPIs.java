@@ -1,5 +1,6 @@
 package RestAssuredAPITestCases;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 
@@ -10,14 +11,20 @@ import java.util.Map;
 
 
 public class PetModuleAPIs {
+
+	@BeforeMethod
+	public void setup() {
+		
+		RestAssured.baseURI = "https://petstore.swagger.io";
+
+	}
+	
 	
 	//Test Case1: To Validate that the request is successfully processed or not with Valid URL
 	
 	@Test
 	public void getPetStatus_TC_001()
-	{
-		RestAssured.baseURI = "https://petstore.swagger.io";
-	
+	{	
 		given().log().all()
 			.when().log().all()
 				.get("/v2/pet/findByStatus")
@@ -31,9 +38,7 @@ public class PetModuleAPIs {
 	
 	@Test
 	public void getPetStatus_TC_002()
-	{
-		RestAssured.baseURI = "https://petstore.swagger.io";
-	
+	{	
 		given().log().all()
 			.when().log().all()
 				.get("/v2/pet/findByStatus01")
@@ -48,9 +53,7 @@ public class PetModuleAPIs {
 	
 	@Test
 	public void getPetStatus_TC_003()
-	{
-		RestAssured.baseURI = "https://petstore.swagger.io";
-	
+	{	
 		given().log().all()
 			.queryParam("status", "available")
 				.when().log().all()
@@ -65,9 +68,7 @@ public class PetModuleAPIs {
 	
 		@Test
 		public void getPetStatus_TC_004()
-		{
-			RestAssured.baseURI = "https://petstore.swagger.io";
-			
+		{			
 			Map<String, String> queryMap = new HashMap<String, String>();
 			queryMap.put("status", "pending");
 			
@@ -85,9 +86,7 @@ public class PetModuleAPIs {
 	
 		@Test
 		public void getPetStatus_TC_005()
-		{
-			RestAssured.baseURI = "https://petstore.swagger.io";
-		
+		{		
 			given().log().all()
 				.queryParam("status", "sold")
 					.when().log().all()
@@ -102,9 +101,7 @@ public class PetModuleAPIs {
 	
 		@Test
 		public void findPetByID_TC_006()
-		{
-			RestAssured.baseURI = "https://petstore.swagger.io";
-		
+		{		
 			given().log().all()
 				.when().log().all()
 					.get("/v2/pet/2580") // Used Pet ID --> 2580
